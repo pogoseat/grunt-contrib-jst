@@ -76,7 +76,20 @@ module.exports = function(grunt) {
               output[index] = "  " + line;
             });
           }
-          output.unshift("define(function(){");
+
+          if (options.dependencies) {
+
+            var paths  = options.dependencies.paths;
+            var labels = options.dependencies.variables;
+
+            output.unshift("define([" + paths + "], function(" + labels + "){");
+
+          } else {
+            output.unshift("define(function(){");
+          }
+
+
+
           if (options.namespace !== false) {
             // Namespace has not been explicitly set to false; the AMD
             // wrapper will return the object containing the template.
