@@ -80,7 +80,7 @@ module.exports = function(grunt) {
           if (options.dependencies) {
 
             var paths  = options.dependencies.paths;
-            var labels = options.dependencies.variables;
+            var labels = options.dependencies.labels;
 
             output.unshift("define([" + paths + "], function(" + labels + "){");
 
