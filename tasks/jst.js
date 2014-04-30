@@ -78,17 +78,21 @@ module.exports = function(grunt) {
           }
 
           if (options.dependencies) {
+            var paths = [],
+              labels = [];
 
-            var paths  = options.dependencies.paths;
-            var labels = options.dependencies.labels;
+            _.each(options.dependencies, function (dep) {
+              paths.push("'" + dep.path + "'");
+              labels.push(dep.label);
+            });
 
-            output.unshift("define([" + paths + "], function(" + labels + "){");
-
+            output.unshift("define([" + 
+              _(paths).join(',')  + "], function(" + 
+              _(labels).join(',') + "){"
+            );
           } else {
             output.unshift("define(function(){");
           }
-
-
 
           if (options.namespace !== false) {
             // Namespace has not been explicitly set to false; the AMD
